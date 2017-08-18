@@ -56,3 +56,24 @@ productName:      项目名称
 ```
 RewriteRule ^((?s).*)$ index.php?_url=/$1 last;
 ```
+
+## 试用数据测试
+```
+// POST 请求
+http://<DOMAIN>/Index/test
+
+// 返回值
+{
+    "status": true,
+    "type": "json",
+    "msg": "API_COMM_001",
+    "code": "API_COMM_001",
+    "code_msg": "success",
+    "code_user_msg": "success",
+    "result": {
+        "uname": "gaox",
+        "email": "gaoxiang@xiaohe.com",
+        "remark": "这是一个测试"
+    }
+}
+```
