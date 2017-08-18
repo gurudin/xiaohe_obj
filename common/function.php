@@ -190,45 +190,6 @@ function get_client_ip($type = 0, $adv = false)
 }
 
 /**
- * 消息入列
- *
- * @param  string $db_name 库名称
- * @param  string $sql SQL语句
- *
- * @return boolean
- */
-function addQueue($db_name, $sql)
-{
-    //加载RabbitMQ类库
-    require sprintf('%sutils/autoload.php', ROOT);
-
-    //获取消息队列配置
-    $o_sql  = $sql;
-    $uri    = $_SERVER['HTTP_HOST'].$_GET['_url'];
-    $sql    = base64_encode(json_encode(array('sql'=>$sql, 'time'=>microtime(), 'uri'=>$uri)));
-    $config = C('MQ.good');
-
-
-    //连接RabbitMQ
-    $connection = new PhpAmqpLib\Connection\AMQPStreamConnection($config['host'], $config['port'], $config['username'], $config['password'], $config['vhostname']);
-
-    //打开消息通道
-    $channel = $connection->channel();
-    $channel->queue_declare($db_name, false, true, false, false);
-
-    //消息入列
-    $msg = new PhpAmqpLib\Message\AMQPMessage($sql, array('delivery_mode'=>2));
-    $channel->basic_publish($msg, '', $db_name);
-
-    //关闭链接
-    $channel->close();
-    $connection->close();
-
-    //记录队列日志
-    DLOG($db_name.' '.$o_sql, 'INFO', 'queue_sql.log');
-}
-
-/**
  * 返回UUID
  *
  * @param void

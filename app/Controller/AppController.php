@@ -20,9 +20,13 @@ class AppController extends \Phalcon\Mvc\Controller
         // 入口日志
         DLOG('request:'.json_encode($this->args));
 
-        $this->verifySign();
+        if (C('IS_SIGN')) {
+            $this->verifySign();
+        }
 
-        $this->verifyToken();
+        if (C('IS_TOKEN')) {
+            $this->verifyToken();
+        }    
     }
 
     /**

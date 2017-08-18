@@ -36,8 +36,6 @@ try {
         ROOT . 'conf'
     ])->register();
 
-
-
     if (empty($_REQUEST)) {
         dataReturn(false, 'API_COMM_404');
     }
@@ -81,9 +79,10 @@ try {
     $myController = new $controller();
     $app->post("/$action/$func", [$myController, $func]);
 
-    // 支付异步回调方法
-    $app->post("/Notify/alipay_pc", ['NotifyController', 'alipay_pc']);
-    $app->get("/Notify/alipay_pc", ['NotifyController', 'alipay_pc']);
+    /**
+     * 示例 增加一个get访问方法
+     * @code $app->get("/Index/test", [new IndexController(), 'test']);
+     */
 
     // 404
     $app->notFound(function () use ($app) {

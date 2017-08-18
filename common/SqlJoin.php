@@ -26,7 +26,8 @@
  */
 use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
 
-class SqlJoin{
+class SqlJoin
+{
     /**
      * 关键字
      * @var [array]
@@ -60,7 +61,8 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return 空
      */
-    private function resetOption(){
+    private function resetOption()
+    {
         $this->options = [
             'table' => '',
             'field' => '*',
@@ -84,7 +86,8 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return string
      */
-    public function prevSql(){
+    public function prevSql()
+    {
         return $this->prev_sql;
     }
 
@@ -100,8 +103,10 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return $this
      */
-    public function table($table = ''){
+    public function table($table = '')
+    {
         $this->options['table'] = $table;
+
         return $this;
     }
 
@@ -117,8 +122,10 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return $this
      */
-    public function order($order = ''){
-        $this->options['order'] = $order!=''?' order by '.$order:'';
+    public function order($order = '')
+    {
+        $this->options['order'] = $order != '' ? ' order by '.$order : '';
+
         return $this;
     }
 
@@ -134,8 +141,10 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return $this
      */
-    public function group($group = ''){
-        $this->options['group'] = $group!=''?' group by '.$group:'';
+    public function group($group = '')
+    {
+        $this->options['group'] = $group != '' ? ' group by '.$group : '';
+
         return $this;
     }
 
@@ -151,8 +160,10 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return $this
      */
-    public function limit($limit = '10'){
+    public function limit($limit = '10')
+    {
         $this->options['limit'] = ' limit '.$limit;
+
         return $this;
     }
 
@@ -170,7 +181,8 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return $this
      */
-    public function where($where = ''){
+    public function where($where = '')
+    {
         if (is_array($where)) {
             $new_where = 'WHERE ';
             foreach ($where as $key => $value) {
@@ -197,7 +209,7 @@ class SqlJoin{
                 }
 
                 if (!is_array($value)){
-                    $val = is_string($value)?"'".$value."'":$value;
+                    $val = is_string($value) ? "'".$value."'" : $value;
                     $new_where .= "$key".'='.$val.' AND ';
                 }
 
@@ -205,7 +217,7 @@ class SqlJoin{
             $new_where = substr($new_where, 0, -5);
 
             $this->options['where'] = ' '.$new_where.' ';
-        }else{
+        } else {
             $this->options['where'] = $where!=''?' WHERE '.$where:'';
         }
 
@@ -226,7 +238,8 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return $this
      */
-    public function field($field = '*'){
+    public function field($field = '*')
+    {
         switch (gettype($field)) {
             case 'string':
                 break;
@@ -259,7 +272,8 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return $this
      */
-    public function join($join = ''){
+    public function join($join = '')
+    {
         if ($join != '') {
             $this->options['join'] .= ' '.$join.' ';
         }
@@ -279,7 +293,8 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return string $sql
      */
-    public function sql($type='select', $data=array()){
+    public function sql($type='select', $data=array())
+    {
         $type = strtolower($type);
         $sql = '';
         if ($type == 'select') {
@@ -338,13 +353,15 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return array 查询结果
      */
-    public function query($model, $sql='', $row='all'){
+    public function query($model, $sql='', $row='all')
+    {
         $sql = $sql==''?$this->prev_sql:$sql;
         $list = new Resultset(null, $model, $model->getReadConnection()->query($sql));
         $list = $list->toArray();
         if ($row == 'find') {
-            $list = isset($list[0])?$list[0]:'';
+            $list = isset($list[0]) ? $list[0] : '';
         }
+
         return $list;
     }
 
@@ -362,10 +379,12 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return bool
      */
-    public function update($model, $sql=''){
+    public function update($model, $sql='')
+    {
         if ($sql == '') {
             return false;
         }
+
         return $model->getWriteConnection()->execute($sql);
     }
 
@@ -383,15 +402,16 @@ class SqlJoin{
      * ----------------------------------------------------------
      * @return bool
      */
-    public function insert($model, $data=array()){
+    public function insert($model, $data=array())
+    {
         foreach ($data as $key => $value) {
             $model->{$key} = $value;
         }
         if (!$model->save()) {
             foreach ($model->getMessages() as $key => $value) {
                 $err['message'] = $value->getMessage();
-                $err['Field'] = $value->getField();
-                $err['type'] = $value->getType();
+                $err['Field']   = $value->getField();
+                $err['type']    = $value->getType();
             }
             return false;
         }

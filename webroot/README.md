@@ -23,7 +23,7 @@ productName:      项目名称
 │  ├─cache        缓存目录
 │  ├─logs         日志存放目录
 │
-├─utils           第三方类库目录
+├─vendor          第三方类库目录
 │  ├─...          更多第三方类库（可以自定义）
 │
 ├─webroot         入口目录
