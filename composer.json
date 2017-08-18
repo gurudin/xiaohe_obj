@@ -1,0 +1,22 @@
+{
+    "name": "gaoxiang001/xiaohe_obj",
+    "description": "Phalcon接口 目录结构",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "gaoxiang",
+            "email": "gaoxiang@xiaohe.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}
