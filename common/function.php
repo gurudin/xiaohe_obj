@@ -109,8 +109,10 @@ function getArrVal($arr, $key, $default = '')
             return (empty($data) ? $default : $data); break;
         default:
             $data = trim($data);
+
             return (strlen($data) ? addslashes($data) : $default); break;
     }
+
     return $default;
 }
 
@@ -153,6 +155,7 @@ function DLOG($log_content='', $log_level='INFO', $file_name='debug.log')
     $fp = fopen($file_path, 'a+');
     fwrite($fp, $content_prefix.$log_content.$content_suffix."\n");
     fclose($fp);
+
     return;
 }
 
@@ -168,12 +171,20 @@ function get_client_ip($type = 0, $adv = false)
 {
     $type       =  $type ? 1 : 0;
     static $ip  =   NULL;
-    if ($ip !== NULL) return $ip[$type];
+
+    if ($ip !== NULL) {
+        return $ip[$type];
+    }
+
     if($adv){
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $arr    =   explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             $pos    =   array_search('unknown',$arr);
-            if(false !== $pos) unset($arr[$pos]);
+
+            if(false !== $pos) {
+                unset($arr[$pos]);
+            }
+
             $ip     =   trim($arr[0]);
         }elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
             $ip     =   $_SERVER['HTTP_CLIENT_IP'];
@@ -186,6 +197,7 @@ function get_client_ip($type = 0, $adv = false)
     // IP地址合法验证
     $long = sprintf("%u",ip2long($ip));
     $ip   = $long ? array($ip, $long) : array('0.0.0.0', 0);
+
     return $ip[$type];
 }
 
@@ -199,6 +211,7 @@ function get_client_ip($type = 0, $adv = false)
 function getUuid()
 {
     $random = new Phalcon\Security\Random();
+    
     return str_replace('-', '', $random->uuid());
 }
 

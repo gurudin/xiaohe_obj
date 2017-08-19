@@ -277,6 +277,7 @@ class SqlJoin
         if ($join != '') {
             $this->options['join'] .= ' '.$join.' ';
         }
+        
         return $this;
     }
 

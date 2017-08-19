@@ -83,6 +83,7 @@ class Validate {
                 }
             }
         }
+
         return true;
     }
 
@@ -148,6 +149,7 @@ class Validate {
         self::$field = $field;
         self::$rule  = $rule;
         $method = 'vd' . ucfirst($method);
+
         return self::$method();
     }
 
@@ -202,6 +204,7 @@ class Validate {
         if (isset(self::$data[self::$field])) {
             $val = self::$data[self::$field];
         }
+
         return $val;
     }
 
@@ -235,6 +238,7 @@ class Validate {
      */
     private static function vdEmpty(){
         $val = self::getVal();
+
         return (boolean)(is_array($val) ? $val : strlen($val));
     }
 
@@ -266,6 +270,7 @@ class Validate {
         if (isset(self::$rule['equ'])) {
             $res = $res && ($len==self::$rule['equ']);
         }
+
         return $res;
     }
 
@@ -286,6 +291,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['email'], $val);
     }
 
@@ -306,6 +312,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['url'], $val);
     }
 
@@ -326,6 +333,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['english'], $val);
     }
 
@@ -346,6 +354,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['chinese'], $val);
     }
 
@@ -366,6 +375,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['tel'], $val);
     }
 
@@ -386,6 +396,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['mobile'], $val);
     }
 
@@ -422,6 +433,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['id_card'], $val);
     }
 
@@ -442,6 +454,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['money'], $val);
     }
 
@@ -462,6 +475,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['pos_int'], $val);
     }
 
@@ -482,6 +496,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['non_negative_int'], $val);
     }
 
@@ -502,6 +517,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['year'], $val);
     }
 
@@ -522,6 +538,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['date'], $val);
     }
 
@@ -542,6 +559,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$patterns['ip'], $val);
     }
 
@@ -562,6 +580,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+
         return preg_match(self::$rule['pattern'], $val);
     }
 
@@ -582,6 +601,7 @@ class Validate {
         if (!strlen($val)) {
             return true;
         }
+        
         return in_array($val, self::$rule['arr']);
     }
 }
