@@ -62,6 +62,22 @@ RewriteRule ^((?s).*)$ index.php?_url=/$1 last;
 // POST 请求
 http://<DOMAIN>/Index/test
 
+// 请求参数
+$params = [
+    'keys' => [
+        'timestamp' => '时间戳',
+        'packey'    => '平台key',
+        'data_type' => 'json',
+        'data_sign' => '签名',
+        'token_key' => 'key',
+        'token_val' => 'value',
+    ],
+    'data' => [
+        'key' => 'value',
+        ... // 自定义参数
+    ]
+];
+
 // 返回值
 {
     "status": true,
