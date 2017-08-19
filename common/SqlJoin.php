@@ -413,8 +413,103 @@ class SqlJoin
                 $err['Field']   = $value->getField();
                 $err['type']    = $value->getType();
             }
+            DLOG(json_encode($err), 'ERROR', 'exception.log');
+
             return false;
         }
+
+        return true;
+    }
+
+    /**
+     * 跨库事务 transaction manager
+     *
+     * @param array
+     *
+     * @return bool
+     *
+     * $args = [
+     *     ['db_name' => 'db_name', 'sql' => 'sql'],
+     *     ['db_name' => 'db_name', 'sql' => 'sql'],
+     *     ...
+     * ]
+     *
+     * @descript 跨库事务执行效率较慢，非严格要求数据统一性慎用跨库事务
+     * 执行失败请查看:  SHOW VARIABLES LIKE '%xa%' 查看XA是否开启，表引擎是否是InnoDB
+     * 如果未开启执行:  SET innodb_support_xa = ON
+     * 表引擎非InnoDB: 不支持事务
+     */
+    final public function XA($data)
+    {
+        $config     = new \Phalcon\Config\Adapter\Ini(ROOT. 'conf'. DIRECTORY_SEPARATOR .'db.ini');
+        $mysql_pool = []; // connections pool
+
+        // db connections
+        foreach ($data as $key => $value) {
+            if (!isset($mysql_pool[$value['db_name']])) {
+                $xid          = uniqid('');
+                $conf_db      = '';
+                $join_db_name = $value['db_name'].'_master';
+                $conf_db      = $config->$join_db_name;
+
+                // connections
+                $mysql_pool[$value['db_name']]['conn'] = new mysqli(
+                    $conf_db->host,
+                    $conf_db->username,
+                    $conf_db->password,
+                    $conf_db->dbname,
+                    $conf_db->port
+                );
+
+                // add xa id
+                $mysql_pool[$value['db_name']]['xid'] = $xid;
+
+                if (mysqli_connect_errno()) {
+                    throw new Exception(mysqli_connect_error());
+                }
+            }
+        }
+
+        try {
+            // xa start
+            foreach ($mysql_pool as $key => $pool) {
+                $pool['conn']->query("XA START '{$pool['xid']}'");
+            }
+
+            // execute sql
+            foreach ($data as $key => $value) {
+                $exe_res = $mysql_pool[$value['db_name']]['conn']->query($value['sql']);
+                if ($exe_res == false) {
+                   throw new Exception("{$value['sql']} 执行失败！");
+                }
+            }
+
+            // xa commit
+            foreach ($mysql_pool as $key => $pool) {
+                $pool['conn']->query("XA END '{$pool['xid']}'");
+                $pool['conn']->query("XA PREPARE '{$pool['xid']}'");
+                $pool['conn']->query("XA COMMIT '{$pool['xid']}'");
+            }
+        } catch (Exception $e) {
+            // rollback
+            foreach ($mysql_pool as $key => $pool) {
+                $pool['conn']->query("XA END '{$pool['xid']}'");
+                $pool['conn']->query("XA PREPARE '{$pool['xid']}'");
+                $pool['conn']->query("XA ROLLBACK '{$pool['xid']}'");
+
+                // close db connections
+                $pool['conn']->close();
+            }
+            DLOG('XA: '.json_encode($data).' err sql:'.$e->getMessage(), 'ERROR', 'exception.log');
+
+            return false;
+        }
+
+        // close db connections
+        foreach ($mysql_pool as $key => $pool) {
+            $pool['conn']->close();
+        }
+
         return true;
     }
 }

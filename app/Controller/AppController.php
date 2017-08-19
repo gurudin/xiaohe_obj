@@ -1,19 +1,20 @@
 <?php
-
 /**
  * Controller文件夹父类
  * User: 高翔
  * Date: 2017/7/13
  * Time: 19:43
  */
+use Phalcon\Mvc\Controller;
 
-class AppController extends \Phalcon\Mvc\Controller
+class AppController extends Controller
 {
     protected $args; // 请求参数
 
-    /*
+    /**
      * 构造方法
-     * */
+     * @var __construct
+     */
     public function onConstruct()
     {
         $this->args = $_REQUEST;
@@ -26,12 +27,11 @@ class AppController extends \Phalcon\Mvc\Controller
 
         if (C('IS_TOKEN')) {
             $this->verifyToken();
-        }    
+        }
     }
 
     /**
      * 验证签名
-     *
      */
     protected function verifySign()
     {
@@ -53,8 +53,8 @@ class AppController extends \Phalcon\Mvc\Controller
     /**
      * 生成数据签名
      *
-     * @param array $param 参数
-     * @param string $code 安全码
+     * @param array  $param 参数
+     * @param string $code  安全码
      *
      * @return string
      *

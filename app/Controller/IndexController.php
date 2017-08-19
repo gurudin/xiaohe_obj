@@ -34,6 +34,6 @@ class IndexController extends AppController
             'remark' => '这是一个测试'
         ]);
 
-        dataReturn(true, 'API_COMM_001', array_merge($result, $this->args));
+        dataReturn(true, 'API_COMM_001', array_merge((array)$result, $this->args));
     }
 }

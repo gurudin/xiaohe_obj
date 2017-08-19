@@ -96,5 +96,6 @@ try {
     // echo "PhalconException: ", $e->getMessage();
     $err_msg = sprintf('File:%s Line:%s Info:%s', $e->getFile(), $e->getLine(), $e->getMessage());
     DLOG($err_msg, 'ERROR', 'exception.log');
+    
     dataReturn(false, 'API_COMM_004', $e->getMessage());
 }
