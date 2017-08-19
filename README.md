@@ -93,3 +93,8 @@ $params = [
     }
 }
 ```
+
+## composer install
+```
+composer create-project gaoxiang001/xiaohe_obj test_obj dev-master -vvv
+```
