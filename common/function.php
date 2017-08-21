@@ -12,7 +12,6 @@ function dataReturn($status = true, $msg = 'API_COMM_001', $result = null)
     $result = array(
         'status'        => $status, //接口操作状态
         'type'          => 'json', //数据交互类型
-        'msg'           => $msg, //以后要慢慢废掉
         'code'          => $msg, //接口错误码
         'code_msg'      => $tip[$msg][0], //操作错误信息
         'code_user_msg' => $tip[$msg][1], //用户提示信息
