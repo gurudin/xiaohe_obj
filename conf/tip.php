@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: 高翔
- * Date: 2017/7/13
- * Time: 11:50
+ * 错误描述文件
+ *
+ * @copyright Copyright 2012-2017, BAONAHAO Software Foundation, Inc. ( http://api.baonahao.com/ )
+ * @link http://api.baonahao.com api(tm) Project
+ * @author gaoxiang <gaoxiang@xiaohe.com>
  */
 return [
     'API_COMM_001' => ['success', 'success'],

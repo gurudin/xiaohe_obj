@@ -1,10 +1,10 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: 高翔
- * Date: 2017/7/19
- * Time: 17:36
+ * Token Model
+ *
+ * @copyright Copyright 2012-2017, BAONAHAO Software Foundation, Inc. ( http://api.baonahao.com/ )
+ * @link http://api.baonahao.com api(tm) Project
+ * @author gaoxiang <gaoxiang@xiaohe.com>
  */
 use Phalcon\Mvc\Model;
 

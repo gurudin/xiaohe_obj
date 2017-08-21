@@ -1,9 +1,10 @@
 <?php
 /**
  * 入口文件
- * User: 高翔
- * Date: 2017/7/12
- * Time: 19:16
+ *
+ * @copyright Copyright 2012-2017, BAONAHAO Software Foundation, Inc. ( http://api.baonahao.com/ )
+ * @link http://api.baonahao.com api(tm) Project
+ * @author gaoxiang <gaoxiang@xiaohe.com>
  */
 use Phalcon\Loader;
 use Phalcon\Mvc\Micro;
@@ -96,6 +97,6 @@ try {
     // echo "PhalconException: ", $e->getMessage();
     $err_msg = sprintf('File:%s Line:%s Info:%s', $e->getFile(), $e->getLine(), $e->getMessage());
     DLOG($err_msg, 'ERROR', 'exception.log');
-    
+
     dataReturn(false, 'API_COMM_004', $e->getMessage());
 }

@@ -1,9 +1,10 @@
 <?php
 /**
  * 公共方法
- * User: 高翔
- * Date: 2017/7/13
- * Time: 11:35
+ *
+ * @copyright Copyright 2012-2017, BAONAHAO Software Foundation, Inc. ( http://api.baonahao.com/ )
+ * @link http://api.baonahao.com api(tm) Project
+ * @author gaoxiang <gaoxiang@xiaohe.com>
  */
 function dataReturn($status = true, $msg = 'API_COMM_001', $result = null)
 {
@@ -210,7 +211,7 @@ function get_client_ip($type = 0, $adv = false)
 function getUuid()
 {
     $random = new Phalcon\Security\Random();
-    
+
     return str_replace('-', '', $random->uuid());
 }
 

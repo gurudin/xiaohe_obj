@@ -1,9 +1,10 @@
 <?php
 /**
  * Controller文件夹父类
- * User: 高翔
- * Date: 2017/7/13
- * Time: 19:43
+ * 
+ * @copyright Copyright 2012-2017, BAONAHAO Software Foundation, Inc. ( http://api.baonahao.com/ )
+ * @link http://api.baonahao.com api(tm) Project
+ * @author gaoxiang <gaoxiang@xiaohe.com>
  */
 use Phalcon\Mvc\Controller;
 

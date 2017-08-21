@@ -2,9 +2,9 @@
 /**
  * 数据库连接池
  *
- * User: 高翔
- * Date: 2017/7/13
- * Time: 13:21
+ * @copyright Copyright 2012-2017, BAONAHAO Software Foundation, Inc. ( http://api.baonahao.com/ )
+ * @link http://api.baonahao.com api(tm) Project
+ * @author gaoxiang <gaoxiang@xiaohe.com>
  */
 use Phalcon\Config\Adapter\Ini as ConfigIni;
 

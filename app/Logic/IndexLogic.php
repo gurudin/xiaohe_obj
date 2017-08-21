@@ -2,9 +2,10 @@
 
 /**
  * 演示文件
- * User: 高翔
- * Date: 2017/7/18
- * Time: 17:54
+ * 
+ * @copyright Copyright 2012-2017, BAONAHAO Software Foundation, Inc. ( http://api.baonahao.com/ )
+ * @link http://api.baonahao.com api(tm) Project
+ * @author gaoxiang <gaoxiang@xiaohe.com>
  */
 class IndexLogic extends \Phalcon\Mvc\Controller
 {
