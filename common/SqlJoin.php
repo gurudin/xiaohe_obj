@@ -423,7 +423,7 @@ class SqlJoin
     }
 
     /**
-     * 跨库事务 transaction manager
+     * 分布式事务 XA–eXtended Architecture
      *
      * @param array
      *
