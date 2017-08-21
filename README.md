@@ -82,7 +82,6 @@ $params = [
 {
     "status": true,
     "type": "json",
-    "msg": "API_COMM_001",
     "code": "API_COMM_001",
     "code_msg": "success",
     "code_user_msg": "success",
