@@ -26,6 +26,8 @@ productName:      项目名称
 ├─vendor          第三方类库目录
 │  ├─...          更多第三方类库（可以自定义）
 │
+├─doc             版本升级、SQL升级文档存放目录
+│  ├─...
 ├─webroot         入口目录
 │  ├─.htaccess    url重写文件
 │  ├─index.php    入口文件
