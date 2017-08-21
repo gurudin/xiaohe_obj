@@ -67,7 +67,7 @@ function connectDb($db_config, $db_name, $db_type)
 
 
     //Listen all the database events
-    if (C('LISTEN_DB')) {
+    if (getConfig('LISTEN_DB')) {
         $profiler = new Phalcon\Db\Profiler();
         $events_manager->attach('db', function($event, $connection) use ($profiler) {
             //一条语句查询之前事件，profiler开始记录sql语句

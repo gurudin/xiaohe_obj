@@ -21,11 +21,11 @@ class AppController extends Controller
         // 入口日志
         DLOG('request:'.json_encode($this->args));
 
-        if (C('IS_SIGN')) {
+        if (getConfig('IS_SIGN')) {
             $this->verifySign();
         }
 
-        if (C('IS_TOKEN')) {
+        if (getConfig('IS_TOKEN')) {
             $this->verifyToken();
         }
     }
@@ -43,7 +43,7 @@ class AppController extends Controller
         if (empty($args)) {
             dataReturn(false, 'API_COMM_002');
         }
-        $security_code = C('AUTH_PLATFORM.'.$args['packey']);
+        $security_code = getConfig('AUTH_PLATFORM.'.$args['packey']);
         $verify_code = $this->generateSign($data, $security_code);
         if ($verify_code !== $this->args['keys']['data_sign']) {
             dataReturn(false, 'API_COMM_002');
