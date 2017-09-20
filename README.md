@@ -31,7 +31,8 @@ productName:      项目名称
 ├─webroot         入口目录
 │  ├─.htaccess    url重写文件
 │  ├─index.php    入口文件
-│  ├─README.md    接口说明文件
+│
+├─README.md    接口说明文件
 ~~~
 
 ## 命名规范
